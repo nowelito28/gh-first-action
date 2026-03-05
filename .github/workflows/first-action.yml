@@ -23,7 +23,9 @@ jobs:
       - name: Run a one-line script -> greeting
         run: echo "Hello, world!"
       - name: Run a one-line script -> farewell
-        run: echo "Goodbye!"
+        run: |
+          echo "First Goodbye!"
+          echo "Second Goodbye!"
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       #- uses: actions/checkout@v4
