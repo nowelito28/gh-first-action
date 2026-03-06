@@ -21,8 +21,6 @@ on:
     paths:
       - '.github/workflows/*' # Only triggers when pushes on this exactly path and only on those up branches
 
-  
-
 jobs:
   deploy-job:
     runs-on: ubuntu-latest
