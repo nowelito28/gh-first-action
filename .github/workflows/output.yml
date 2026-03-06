@@ -14,4 +14,4 @@ jobs:
         # toJson -> function that converts the github context object into a JSON string to be able
         run: |
           echo "Github context: ${{ toJson(github) }}"
-          echo "Issue info: ${{ toJson(github.event.issue) }}"
+          echo "Event Issue info: ${{ toJson(github.event) }}"
