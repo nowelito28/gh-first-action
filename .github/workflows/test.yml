@@ -41,5 +41,3 @@ jobs:
       # Run tests using 'npm test' -> run the test script defined in the package.json file
       - name: Run tests
         run: npm test
-  
-  
