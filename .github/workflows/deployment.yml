@@ -1,7 +1,7 @@
 # Tests workflow
 
 # Workflow name
-name: Test Project
+name: Deployment Project
 
 # Controls when the workflow will run (events that trigger the workflow)
 on: push # Allows you to run this workflow every time you push to the repository
@@ -41,3 +41,27 @@ jobs:
       # Run tests using 'npm test' -> run the test script defined in the package.json file
       - name: Run tests
         run: npm test
+
+  # Second job defined for this workflow to deploy to a hosting server -> deploy
+  deploy-job:
+    
+    # Initial same steps than before
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v6.0.2
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
+
+      # Build the project using 'npm run build' -> run the build script defined in the package.json file to create the production build of the project
+      - name: Build project
+        run: npm run build
+
+      # Deploy to hosting server -> here you would add the actual deployment commands, such as using scp, rsync, or a deployment action from the marketplace
+      - name: Deploy
+        run: echo "Deploying to hosting server..." # Simulate deployment command, replace with actual deployment commands
+    
