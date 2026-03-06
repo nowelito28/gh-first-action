@@ -1,0 +1,14 @@
+# Output info workflow
+
+name: Output info workflow
+on: workflow_dispatch
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Github context
+        # Variable 'github' -> contains all the information about the event 
+        # that triggered the workflow, the repository, the actor, etc. -> https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+        # toJson -> function that converts the github context object into a JSON string to be able
+        run: |
+          echo "Github context: ${{ toJson(github) }}"

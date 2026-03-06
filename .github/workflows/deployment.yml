@@ -1,9 +1,9 @@
-# Tests workflow
+# Deployment workflow
 
-# Workflow name
+# Event/Workflow name
 name: Deployment Project
 
-# Triggers ->Controls when the workflow will run (events that trigger the workflow)
+# Event Triggers ->Controls when the workflow will run (events that trigger the workflow)
 # push -> Allows you to run this workflow every time you push to the repository
 # workflow_dispatch -> Allows you to run this workflow manually from the Actions tab
 on: [push, workflow_dispatch]
