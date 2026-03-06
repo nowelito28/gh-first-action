@@ -1,0 +1,35 @@
+name: Specific events
+
+# Specific Event/Triggers -> Controls when the workflow will run (events that trigger the workflow)
+# Activity types -> You can specify the activity types that will trigger the workflow for a specific event, for example, for the issues event,
+# you can specify that the workflow will only run when an issue is opened, closed, etc. -> https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#issues
+on:
+  pull_request:
+    # Activity types specified for pull request events -> only trigger this action when theres a pull request opened or closed -> https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request
+    types:
+      - opened
+      - closed
+  workflow_dispatch:
+    # It's not required to specify the activity types of the event (there ara some that haven't) -> default = all activity types registered
+
+
+jobs:
+  deploy-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Github context
+        run: |
+          echo "Github context: ${{ toJson(github) }}"
+          echo "Event Issue info: ${{ toJson(github.event) }}"
+      - name: Get the code
+        uses: actions/checkout@v6.0.2
+      - name: Install dependencies
+        run: npm ci
+      - name: Run lint
+        run: npm run lint
+      - name: Run tests
+        run: npm run test
+      - name: Build project
+        run: npm run build
+      - name: Deploy
+        run: echo "Deploying to hosting server..."
