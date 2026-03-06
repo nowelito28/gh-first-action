@@ -44,6 +44,9 @@ jobs:
 
   # Second job defined for this workflow to deploy to a hosting server -> deploy
   deploy-job:
+
+    # This job will only run if the test-job has completed successfully -> can be an array of jobs [job1, job2, ...]
+    needs: test-job
     
     # Initial same steps than before
     runs-on: ubuntu-latest
