@@ -21,6 +21,8 @@ on:
     paths:
       - '.github/workflows/*' # Only triggers when pushes on this exactly path and only on those up branches
 
+    # Special commits messages at the end of the message-> [skip ci], [no ci], [ci skip], [skip actions], [actions skip] ... -> e.g. git commit -m "no check my code [skip ci]"
+
 jobs:
   deploy-job:
     runs-on: ubuntu-latest
