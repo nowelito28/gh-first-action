@@ -10,8 +10,18 @@ on:
       - opened
       - closed
   workflow_dispatch:
-    # It's not required to specify the activity types of the event (there ara some that haven't) -> default = all activity types registered
+    # It's not required to specify the activity types of the event (there ara some that haven't) -> default = all activity types registered (or those specify in the oficial github doc)
+  push:
+    # Event filters, specifing what of whose metadata/branches/paths... involved let the event trigger the action
+    branches:
+      - main          # main branch => main
+      - 'dev-*'       # branches that start with 'dev-' with any combination (*) => dev-new dev-fix-that-bug ...
+      - 'feature/**'  # branches that start with 'feature/' (other branches) with any combination including '/' (more branches) thereafter (**) => feature/new-feature feature/fix-that-bug/in-scr/controllers ...
+      # devolper-1 branch -> won't trigger the workflow
+    paths:
+      - '.github/workflows/*' # Only triggers when pushes on this exactly path and only on those up branches
 
+  
 
 jobs:
   deploy-job:
