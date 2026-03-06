@@ -1,7 +1,9 @@
 # Output info workflow
 
 name: Output info workflow
-on: workflow_dispatch
+# This workflow will output the github context information when an issue is opened 
+# or when the workflow is manually triggered using the workflow_dispatch event
+on: [issues, workflow_dispatch]
 jobs:
   info:
     runs-on: ubuntu-latest
@@ -12,3 +14,4 @@ jobs:
         # toJson -> function that converts the github context object into a JSON string to be able
         run: |
           echo "Github context: ${{ toJson(github) }}"
+          echo "Issue info: ${{ toJson(github.event.issue) }}"

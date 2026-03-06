@@ -11,9 +11,9 @@ on: [push, workflow_dispatch]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # Stablish the workflow jobs by identation:
-
-  # First job defined for this workflow -> tests
-  test-job:
+  
+  # First job defined for this workflow -> lint
+  lint-job:
 
     # The type of runner that the job will run on -> Github actions runners (OSs available)
     runs-on: ubuntu-latest
@@ -40,15 +40,37 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Run lint using 'npm run lint' -> run the lint script defined in the package.json file
+      - name: Run lint
+        run: npm run lint
+
+  # Second job defined for this workflow -> tests
+  test-job:
+
+    # This job will only run if the lint-job has completed successfully
+    needs: lint-job
+
+    # Initial same steps than before
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v6.0.2
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
+
       # Run tests using 'npm test' -> run the test script defined in the package.json file
       - name: Run tests
         run: npm test
 
-  # Second job defined for this workflow to deploy to a hosting server -> deploy
+  # Third job defined for this workflow to deploy to a hosting server -> deploy
   deploy-job:
 
-    # This job will only run if the test-job has completed successfully -> can be an array of jobs [job1, job2, ...]
-    needs: test-job
+    # This job will only run if the lint-job and test-job have completed successfully -> can be an array of jobs [job1, job2, ...]
+    needs: [lint-job, test-job]
     
     # Initial same steps than before
     runs-on: ubuntu-latest
