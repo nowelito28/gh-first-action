@@ -30,7 +30,7 @@ jobs:
       # No needed, it's preinstalled in the runner selected,
       # but if you want to specify the version of node.js you want to use or it wouldn't be preinstalled -> you can use the "setup-node" action
       - name: Install Node.js
-        uses: actions/setup-node@v3.0.1
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
           
