@@ -1,0 +1,45 @@
+# Tests workflow
+
+# Workflow name
+name: Test Project
+
+# Controls when the workflow will run (events that trigger the workflow)
+on: push # Allows you to run this workflow every time you push to the repository
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # Stablish the workflow jobs by identation:
+
+  # First job defined for this workflow -> tests
+  test-job:
+
+    # The type of runner that the job will run on -> Github actions runners (OSs available)
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Let the github remote server get the repository code before anything else to be able to run the tests
+      - name: Get the code
+        # Search for actions in the github marketplace -> checkout action (or github actions checkout)
+        # (Checkout action): Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it -> download the repository code
+        uses: actions/checkout@v6.0.2
+        # To change any settings of the checkout action, you can use the "with" keyword to specify the parameters of the action
+        #with: ...
+
+      # No needed, it's preinstalled in the runner selected,
+      # but if you want to specify the version of node.js you want to use or it wouldn't be preinstalled -> you can use the "setup-node" action
+      - name: Install Node.js
+        uses: actions/setup-node@v3.0.1
+        with:
+          node-version: '18'
+          
+      # Install dependencies using 'npm ci' (continuous integration) -> install the exact version of the project dependencies (npm install could install breaking version dependencies) 
+      - name: Install dependencies
+        run: npm ci
+
+      # Run tests using 'npm test' -> run the test script defined in the package.json file
+      - name: Run tests
+        run: npm test
+  
+  

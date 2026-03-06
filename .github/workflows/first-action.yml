@@ -3,7 +3,7 @@
 # Workflow name
 name: First Workflow
 
-# Controls when the workflow will run
+# Controls when the workflow will run (events that trigger the workflow)
 on: workflow_dispatch # Allows you to run this workflow manually from the Actions tab
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
