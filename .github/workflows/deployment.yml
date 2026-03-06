@@ -62,9 +62,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Run tests using 'npm test' -> run the test script defined in the package.json file
+      # Run tests using 'npm run test' -> run the test script defined in the package.json file
       - name: Run tests
-        run: npm test
+        run: npm run test
 
   # Third job defined for this workflow to deploy to a hosting server -> deploy
   deploy-job:
