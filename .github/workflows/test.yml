@@ -32,7 +32,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
           
       # Install dependencies using 'npm ci' (continuous integration) -> install the exact version of the project dependencies (npm install could install breaking version dependencies) 
       - name: Install dependencies
